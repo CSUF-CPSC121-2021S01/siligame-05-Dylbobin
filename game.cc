@@ -40,7 +40,9 @@ void Game::FilterIntersections() {
             (*playerProjectiles[j]).IntersectsWith(opponent_[i].get())) {
           (*opponent_[i]).SetIsActive(false);
           (*playerProjectiles[j]).SetIsActive(false);
-          scoreCount = scoreCount + 1;
+          if (myPlayer.GetIsActive()) {
+              scoreCount += 1;
+            }
         }
       }
     }
