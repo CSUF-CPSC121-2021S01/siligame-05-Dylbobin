@@ -32,7 +32,7 @@ class Game : public graphics::AnimationEventListener,
   }
 
   void FilterIntersections();
-  
+
   void MoveGameElements();
 
   void RemoveInactive();

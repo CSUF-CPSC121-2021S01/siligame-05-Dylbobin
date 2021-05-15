@@ -28,30 +28,31 @@ void Game::OnMouseEvent(const graphics::MouseEvent &mouseEvent) {
 
 void Game::FilterIntersections() {
   for (int i = 0; i < opponent_.size(); i++) {
-      if ((*opponent_[i]).GetIsActive() && myPlayer.GetIsActive() && myPlayer.IntersectsWith(opponent_[i].get())) {
-        (*opponent_[i]).SetIsActive(false);
-        myPlayer.SetIsActive(false);
-        gameOver = true;
-      } else {
-        for (int j = 0; j < playerProjectiles.size(); j++) {
-          if ((*opponent_[i]).GetIsActive() &&
-              (*playerProjectiles[j]).GetIsActive() &&
-              (*playerProjectiles[j]).IntersectsWith(opponent_[i].get())) {
-            (*opponent_[i]).SetIsActive(false);
-            (*playerProjectiles[j]).SetIsActive(false);
-              scoreCount = scoreCount + 1;
-          }
+    if ((*opponent_[i]).GetIsActive() && myPlayer.GetIsActive() &&
+        myPlayer.IntersectsWith(opponent_[i].get())) {
+      (*opponent_[i]).SetIsActive(false);
+      myPlayer.SetIsActive(false);
+      gameOver = true;
+    } else {
+      for (int j = 0; j < playerProjectiles.size(); j++) {
+        if ((*opponent_[i]).GetIsActive() &&
+            (*playerProjectiles[j]).GetIsActive() &&
+            (*playerProjectiles[j]).IntersectsWith(opponent_[i].get())) {
+          (*opponent_[i]).SetIsActive(false);
+          (*playerProjectiles[j]).SetIsActive(false);
+          scoreCount = scoreCount + 1;
         }
       }
     }
-    for (int i = 0; i < opponentProjectiles.size(); i++) {
-      if ((*opponentProjectiles[i]).GetIsActive() && myPlayer.GetIsActive() &&
-          myPlayer.IntersectsWith(opponentProjectiles[i].get())) {
-        (*opponentProjectiles[i]).SetIsActive(false);
-        myPlayer.SetIsActive(false);
-        gameOver = true;
-      }
+  }
+  for (int i = 0; i < opponentProjectiles.size(); i++) {
+    if ((*opponentProjectiles[i]).GetIsActive() && myPlayer.GetIsActive() &&
+        myPlayer.IntersectsWith(opponentProjectiles[i].get())) {
+      (*opponentProjectiles[i]).SetIsActive(false);
+      myPlayer.SetIsActive(false);
+      gameOver = true;
     }
+  }
 }
 
 void Game::LaunchProjectiles() {
@@ -66,7 +67,7 @@ void Game::LaunchProjectiles() {
 }
 
 void Game::MoveGameElements() {
-    for (int i = 0; i < playerProjectiles.size(); i++) {
+  for (int i = 0; i < playerProjectiles.size(); i++) {
     if ((*playerProjectiles[i]).GetIsActive()) {
       (*playerProjectiles[i]).Move(screen);
     }
@@ -110,7 +111,7 @@ void Game::UpdateScreen() {
   graphics::Color navyBlue(25, 0, 142);
   graphics::Color brightRed(255, 11, 0);
   screen.DrawRectangle(0, 0, screen.GetWidth(), screen.GetHeight(),
-                          graphics::Color(255, 255, 255));
+                       graphics::Color(255, 255, 255));
   std::string scoreCounttxt = "Score: " + std::to_string(gameOver);
   screen.DrawText(3, 3, scoreCounttxt, 20, navyBlue);
   if (gameOver == true) {
